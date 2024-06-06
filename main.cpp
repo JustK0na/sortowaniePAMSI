@@ -296,8 +296,20 @@ int main(int argc, char**argv){
   for(int i=0; i<(int)dane.size(); i++)
     dane.at(i).print();
   perror("time: ");
-  perror(to_string(time.count()).c_str());
-  perror("microseconds");
+  if(time.count()<=1000){
+    perror(to_string(time.count()).c_str());
+    perror("microseconds");
+  }
+  else if(time.count()>1000&&time.count()<1000000){
+    perror(to_string((float)time.count()/1000.0).c_str());
+    perror("miliseconds");
+  }
+
+  else if(time.count()>=1000000){
+    perror(to_string((float)time.count()/1000000.0).c_str());
+    perror("seconds");
+  }
+
     
   if(argc>=6)
     perror(to_string(seed).c_str());
